@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 """myProject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -21,4 +22,5 @@ urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
 	#url(r'^$', views.home_page, name = 'home'),#создали путь к home_page
 	url(r'^$', views.index, name = 'index'), #main hage of the blog app
+
 ]

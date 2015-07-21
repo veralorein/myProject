@@ -1,12 +1,26 @@
+# -*- coding:utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
+import datetime
+
+class MyStructure(object):
+	"""docstring for """
+	pass
+
 
 def home_page(request):
-	hel='<h1>Hello World</h1>'
+	hel='<html><title>Blog lists</title>Hello My PythonBlog <br> "You must be joking!" I can hear you say.</html>'
 	return HttpResponse(hel)
-	
+
 def index(request):
-	context_dict = {'title': "It's my blog", 'boldmessage': "I'm bold font from the context"}
-	return render(request, 'blog/index.html', context_dict)
+	c = MyStructure()
+	c.company = 'Cool Star'
+	c.title = 'Cool Star Blog'
+	c.author_name = 'Jhon Smith'
+	c.pub_date = datetime.datetime.now()
+	c.article_list = [{'title': "Title1", 'text': "Text1"}, {'title': "Title2", 'text': "Text2"}, {'title': "Title3", 'text': "Text3"}, {'title': "Title4", 'text': "Text4"}]
+	c.boldmessage = "Вы можете изменить значение переменной используя фильтры. Фильтры выглядят таким образом: {{ name|lower }}. Это выведет значение переменной {{ name }} после применения фильтра lower к нему, который преобразует значение в нижний регистр. Используйте символ (|) для применения фильтра. I am bold font from the context"
+	c.text = 'Вы можете изменить значение переменной используя фильтры. Фильтры выглядят таким образом: {{ name|lower }}. Это выведет значение переменной {{ name }} после применения фильтра lower к нему, который преобразует значение в нижний регистр. Используйте символ (|) для применения фильтра. I am bold font from the context Можно использовать “цепочку” фильтров. Вывод одного фильтра используется для другого. {{ text|escape|linebreaks }} обычно применяется для экранирования текста, и замены переноса строки тегами <p>.'
+	return render(request, 'blog/index.html', c.__dict__)
 
 # Create your views here.
