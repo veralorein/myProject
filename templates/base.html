@@ -1,20 +1,21 @@
-<!DOCTYPE html> 
-<html> 
-    <head> 
-	<title>{% block title %} SITE NAME {% endblock %}</title>
-    </head> 
-   <body> 
-	{% block head %} 
-	{% block htitle %}{% endblock %} 
-	{% block menu %}{% endblock %} 
-	{% endblock %} 
-{% block page %} 
-	{% block content %} 
-	{% endblock %} 
-{% endblock %} 
-{% block footer %} 
-	{% block copyright %} 
-	{% endblock %} 
-{% endblock %} 
-    </body> 
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>{% block title %} My Project {% endblock %}</title>
+    </head>
+   <body> <!-- самый главный шаблон-->
+	{% block header %}
+	{% block htitle %}{% endblock %}
+	{% block menu %}{% endblock %}
+	{% endblock %}
+{% block page %}
+	{% block content %}
+	{% endblock %}
+{% endblock %}
+{% block footer %}
+	{% block copyright %}
+  {{company}}
+	{% endblock %}
+{% endblock %}
+    </body>
 </html>

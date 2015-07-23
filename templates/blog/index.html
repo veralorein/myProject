@@ -1,17 +1,23 @@
 {% extends "base.html" %}
-{% block title %} {{ block.super }} - SECTION NAME {% endblock %}
+{% block title %} {{ block.super }} - blog index page {% endblock %}
+{% load staticfiles %}
 {% block content %}
 <h1>Blog home page</h1>
 <h2>{{ title }}</h2>
+<!--
 <h2>{{ title | upper }}</h2>
 <h2> {{ title|lower }}</h2>
+-->
 <p><b>{{ boldmessage }}</b></p>
+<img src="{% static 'images/images.png' %}">
 <p>{{ text|escape|linebreaks }}</p>
+<!--
 {{ boldmessage|truncatewords:30 }}
 <p><b>{{ boldmessage|addslashes }}</b></p>
+-->
 {{ datet|date:"SHORT_DATE_FORMAT" }}
 
-{% lorem 3 p random %}
+<!--{% lorem 4 p random %}--><!-- 4 рандомных абзаца -->
 {% for article in article_list %}
 	<div>
 		<h2><a href="#">

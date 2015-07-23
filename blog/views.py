@@ -15,7 +15,7 @@ def home_page(request):
 def index(request):
 	c = MyStructure()
 	c.company = 'Cool Star'
-	c.title = 'Cool Star Blog'
+	c.title = 'Galina Titova Blog'
 	c.author_name = 'Jhon Smith'
 	c.pub_date = datetime.datetime.now()
 	c.article_list = [{'title': "Title1", 'text': "Text1"}, {'title': "Title2", 'text': "Text2"}, {'title': "Title3", 'text': "Text3"}, {'title': "Title4", 'text': "Text4"}]
