@@ -21,6 +21,7 @@ from blog import views
 urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
 	#url(r'^$', views.home_page, name = 'home'),#создали путь к home_page
-	url(r'^$', views.index, name = 'index'), #main hage of the blog app
+	url(r'^$', views.index, name = 'blog'), #main hage of the blog app
+    url(r'^categories', views.categories, name='categories'),
 
 ]
