@@ -21,5 +21,7 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^blog/', include('blog.urls')),
+    url(r'^cat/', include('blog.urls')),
+
     url(r'^$', TemplateView.as_view(template_name='index.html'), name="homepage"),
 ]
