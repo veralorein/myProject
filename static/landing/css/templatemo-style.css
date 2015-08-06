@@ -309,7 +309,7 @@ h3.profile-title {
 }
 
 .main-navigation {
-  margin: 30px 0;
+  margin: 15px 0;
 }
 .main-navigation li {
   display: block;
@@ -336,7 +336,7 @@ h3.profile-title {
 
 .social-icons {
   display: block;
-  padding: 30px 40px;
+  padding: 20px 30px;
 }
 .social-icons li {
   display: inline-block;

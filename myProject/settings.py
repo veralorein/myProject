@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
     'blog',
 )
 
@@ -102,3 +103,30 @@ USE_TZ = True
 
 STATIC_URL = '/static/' #этот статитк это статик из src в html
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),) #этот статик это название папки с картинками и цсс
+
+# Media files (user uploaded)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'public/media')
+MEDIA_URL = '/media/'
+
+# CKEDITOR
+CKEDITOR_UPLOAD_PATH = os.path.join(MEDIA_ROOT, 'plugin/ckeditor/')
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        #'toolbar': 'Full',
+        #'height': '100%',
+        #'width': '100%',
+        'forcePasteAsPlainText': True
+    },
+    'basic': {
+        'toolbar': 'Basic',
+        'height': '100%',
+        'width': '100%',
+    },
+}
+
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+LOGIN_URL = '/blog/login/'
+LOGOUT_URL = '/blog/logout/'

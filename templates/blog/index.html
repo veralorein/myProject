@@ -1,28 +1,35 @@
 {% extends "base.html" %}
-{% block title %} {{ block.super }} - blog index page {% endblock %}
+{% block title %} {{ block.super }} - main page {% endblock %}
 {% load staticfiles %}
 {% block content %}
-<h1>Blog {{ title }} </h1>
+<a href="/blog/register/">Register Here</a>
+<a href="/blog/login/">Sign in</a>
+{% if user.is_authenticated %}
+<h2>Blog says HELLO {{ user.username }}!</h2>
+{% else %}
+<h2>Blog says HELLO guest!</h2>
+{% endif %}
+
+<h1>Blog CATEGORIES{{ title }}</h1>
 	{% if categories_list %}
-      <ul>
-          {% for category in categories_list %}
-            <li>{{ category.name }}</li>
-          {% endfor %}
-      </ul>
+    <ul>
+      {% for category in categories_list %}
+        <li>{{ category.name }}</li>
+      {% endfor %}
+    </ul>
   {% else %}
-            <strong>There are no categories present.</strong>
-        {% endif %}
-        {% if posts_list %}
-            <ul>
-                {% for post in posts_list %}
-                <li>{{ post.title }}</li>
-								<p>{{ post.body }}</p>
-								<a href="{{ post.url}}">GOOGLE</a>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <strong>There are no posts present.</strong>
-        {% endif %}
+    <strong>There are no categories present.</strong>
+  {% endif %}
+<h1>Blog POST-LIST{{ title }}</h1>
+  {% if posts_list %}
+    <div id = "postslist">
+				{% for post in posts_list %}
+          <p><a href="/blog/posts/{{ post.slug }}/">{{ post.title }}</a></p>
+        {% endfor %}
+    </div>
+  {% else %}
+    <strong>There are no posts present.</strong>
+  {% endif %}
 <!--
 <h2>{{ title | upper }}</h2>
 <h2> {{ title|lower }}</h2>

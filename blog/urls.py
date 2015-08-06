@@ -21,7 +21,14 @@ from blog import views
 urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
 	#url(r'^$', views.home_page, name = 'home'),#создали путь к home_page
-	url(r'^$', views.index, name = 'blog'), #main hage of the blog app
+	url(r'^$', views.index, name = 'blog'), #main page of the blog app
     url(r'^categories', views.categories, name='categories'),
+    url(r'^category/(?P<categoryslug>.*)/$', 'blog.views.category'),
+    url(r'^posts/(?P<postslug>.*)/$', 'blog.views.view'),
+    url(r'^register/$', views.register, name = 'register'),
+    url(r'^login/$', views.user_login, name = 'login'),
+    url(r'^restricted/$', views.restricted, name='restricted'),
+    url(r'^logout/$', views.user_logout, name = 'logout'),
+
 
 ]

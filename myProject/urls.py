@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^blog/', include('blog.urls')),
     url(r'^cat/', include('blog.urls')),
-
+    url(r'^ckeditor/', include('ckeditor.urls')),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name="homepage"),
 ]

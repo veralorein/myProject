@@ -1,9 +1,14 @@
 # -*- coding:utf-8 -*-
 from django.shortcuts import render
+from django.shortcuts import render_to_response
 from django.http import HttpResponse
 import datetime
 from blog.models import Category, Post
 from django.views.generic import TemplateView
+from blog.forms import UserForm, UserProfileForm
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.decorators import login_required
 
 class MyStructure(object):
 	"""docstring for """
@@ -39,5 +44,62 @@ def categories(request):
 		context_dict = {'category_list': category_list}
 		return render(request, 'blog/cat.html', context_dict)
 
+def category(reqeust, categoryslug):
+	name = Category.objects.get(slug = categoryslug)
+	posts = Post.objects.filter(category = name)
+	context = {'posts': posts}
+	return render_to_response('blog/singlecategory.html', context)
 
+def view(request, postslug):
+	post = Post.objects.get(slug = postslug)
+	context = {'post': post}
+	return render_to_response('blog/singlepost.html', context)
+
+def register(request):
+	registered = False
+	if request.method == 'POST':
+		user_form = UserForm(data = request.POST)
+		profile_form = UserProfileForm(data = request.POST)
+		if user_form.is_valid() and profile_form.is_valid():
+			user = user_form.save()
+			user.set_password(user.password)
+			user.save()
+			profile = profile_form.save(commit = False)
+			profile.user = user
+			if 'picture' in request.FILES:
+				profile.picture = request.FILES['picture']
+			profile.save()
+			registered = True
+		else:
+			print (user_form.errors, profile_form.errors)
+	else:
+		user_form = UserForm()
+		profile_form = UserProfileForm()
+	return render(request, 'blog/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+
+def user_login(request):
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		user = authenticate (username=username, password=password)
+		if user:
+			if user.is_active:
+				login(request, user)
+				return HttpResponseRedirect('/blog/')
+			else:
+				return HttpResponse("Your Blog account is disabled.")
+		else:
+			print ("Invalid login details: {0}, {1}".format(username, password))
+			return HttpResponse("Invalid login details supplied.")
+	else:
+		return render(request, 'blog/login.html', {})
+
+@login_required
+def restricted(request):
+	return HttpResponse("Since you're logged in, you can see this text!")
+
+@login_required
+def user_logout(request):
+	logout(request)
+	return HttpResponseRedirect('/blog/')
 # Create your views here.
