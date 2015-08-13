@@ -1,9 +1,9 @@
 # -*- coding:utf-8 -*-
 from django import forms
 from django.contrib import admin
-from blog.models import Category, Post
+from blog.models import Category, Post, UserProfile, Comment, Page, Slide, Slider
 from ckeditor.widgets import CKEditorWidget
-from blog.models import UserProfile
+
 
 # Register your models here.
 class PostAdminForm(forms.ModelForm):
@@ -18,6 +18,7 @@ class PostAdmin(admin.ModelAdmin):
     actions = ['make_published', 'make_draft', 'make_unpublished']
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ['title']
+    date_hierarchy = 'updated'
     form = PostAdminForm
 
     def make_published(self, request, queryset):
@@ -52,8 +53,29 @@ class PostAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ["post", "author", "created"]
+
+class SlideInline(admin.TabularInline):
+    model = Slide
+    extra = 1
+
+class SliderAdmin(admin.ModelAdmin):
+    list_display = ['title', 'status']
+    inlines = [SlideInline, ]
+
+class PageAdmin(admin.ModelAdmin):
+    content = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = Page
+        fields = '__all__'
+
 
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(UserProfile)
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(Page, PageAdmin)
+admin.site.register(Slider, SliderAdmin)

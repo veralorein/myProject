@@ -5,10 +5,12 @@
 
 {% block content %}
   <h2>Login to Blog</h2>
-  <form id = "login_form" method="post" action="/blog/login/">
+  <form id = "login_form" method="post" action="/blog/login/" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
+    Username: <input type="text" name="username" value="" size="50" />
+            <br />
+            Password: <input type="password" name="password" value="" size="50" />
+            <br />
     <input type="submit" name="submit" value="REGISTER">
   </form>
 {% endblock %}

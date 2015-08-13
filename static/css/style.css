@@ -225,7 +225,7 @@ h1, h2, h3, h4, h5 {
   text-align : justify;
   margin-bottom: 15px;
 }
- 
+
 /*#navbar li {
   display: block;
 }*/
@@ -268,4 +268,10 @@ h1, h2, h3, h4, h5 {
 }
 #footer p.copyright-text a:hover {
   color: #6cc0f7;
+}
+
+#slider1 {
+  width: 200px;
+  height: 200px;
+
 }

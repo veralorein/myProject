@@ -29,6 +29,10 @@ urlpatterns = [
     url(r'^login/$', views.user_login, name = 'login'),
     url(r'^restricted/$', views.restricted, name='restricted'),
     url(r'^logout/$', views.user_logout, name = 'logout'),
+    url(r"^add_comment/(?P<postslug>.*)/$", "blog.views.add_comment"),
+    url(r"^month/(\d+)/(\d+)/$", "blog.views.month"),
+    url(r'^pages/(?P<pageslug>.*)/$', 'blog.views.page'),
+    url(r'^goto/$', 'blog.views.track_url', name='goto'),
 
 
 ]
